@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="container"></div>
+  <script src="/xuni/bundle.js"></script>
+  <script>
+    // let templateStr = '<h1>我买了一个{{thing}}，好{{mood}}啊</h1>'
+    let templateStr = `
+      <div>
+        <ol>
+          {{#students}}
+          <li class="list-item">
+            学生{{name}}的爱好是
+            <ol>
+              {{#hobbies}}
+              <li>{{.}}</li>
+              {{/hobbies}}
+            </ol>
+          </li>
+          {{/students}}
+        </ol>
+      </div>
+    `
+    let data = {
+      students: [
+        {'name': '小明', 'hobbies': ['游泳', '健身']},
+        {'name': '小红', 'hobbies': ['足球', '篮球', '羽毛球']},
+        {'name': '小明', 'hobbies': ['吃饭', '睡觉']}
+      ]
+    }
+
+    // let templateStr = '我爱{{somebody.people.name}}'
+    // let data = {
+    //   somebody: {
+    //     people: {
+    //       name: 'ssgg'
+    //     }
+    //   }
+    // }
+
+    // let templateStr = `我爱{{somebody}}，{{somebody}}也爱我`
+    // let data = {
+    //   somebody: '代码'
+    // }
+
+    // var domStr = TemplateEngine.render(templateStr, data)
+    // console.log(domStr)
+    // var container = document.getElementById('container')
+    // container.innerHTML = domStr
+
+    // let templateStr = '我买了一个{{thing}}，好{{mood}}啊'
+    let domStr = TemplateEngine.render(templateStr, data)
+    let container = document.getElementById('container')
+    container.innerHTML = domStr
+  </script>
+</body>
+</html>
