@@ -1,5 +1,6 @@
 import vnode from './vnode'
 import createElement from './createElement'
+import patchVnode from './patchVnode'
 
 export default function patch (oldVnode, newVnode) {
   // 判断oldVnode是DOM节点还是虚拟DOM
@@ -11,6 +12,7 @@ export default function patch (oldVnode, newVnode) {
   // 判断oldVnode和newVnode是否为同一个节点（key和sel都相等）
   if (oldVnode.key === newVnode.key && oldVnode.sel === newVnode.sel) {
     // 是同一个节点，进行精细化比较
+    patchVnode(oldVnode, newVnode)
   } else {
     // 不是同一个节点，暴力：先插入新的，再删除旧的（如果顺序相反，则找不到标杆，导致无法删除）
     let newVnodeElm = createElement(newVnode)
